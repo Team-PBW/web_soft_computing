@@ -24,8 +24,7 @@ const UploadCard = () => {
         maxFiles={3}
         onDrop={handleDrop}
         onError={console.error}
-        src={files}
-      >
+        src={files} onDragEnter={undefined} onDragLeave={undefined} onDragOver={undefined} multiple={undefined}      >
         <DropzoneEmptyState />
         <DropzoneContent />
       </Dropzone>

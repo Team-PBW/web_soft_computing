@@ -44,7 +44,7 @@ function PredictPage() {
               executeTime={"0.2ms"}
             />
             <ComparisonCard
-              title="Model CNN + Mish"
+              title="odel CNN + Mish"
               genre="Rock"
               executeTime={"0.5ms"}
             />
