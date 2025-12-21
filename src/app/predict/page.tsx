@@ -3,55 +3,53 @@
 import ComparisonCard from "@/components/ComparisonCard";
 import FloatLoginForm from "@/components/FloatLoginForm";
 import FloatRegisterForm from "@/components/FloatRegisterForm";
+import Footer from "@/components/MainFooter";
 import MainNavbar from "@/components/MainNavbar";
 import UploadCard from "@/components/UploadCard";
 import React, { useEffect, useState } from "react";
 
 function PredictPage() {
-  const [showFormRegister, setShowFormRegister] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (showFormRegister) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [showFormRegister]);
+  const [files, setFiles] = useState<File[] | null>(null);
 
   return (
-    <div className="w-full relative">
+    <section>
       <MainNavbar />
-      <div className="bg-gray-100 min-h-screen p-9">
-        {showFormRegister && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-            <FloatRegisterForm />
-          </div>
-        )}
-        <div className="ml-9 flex flex-col gap-[3rem]">
-          <UploadCard />
+      <div className="bg-gray-100 min-h-screen py-12">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col gap-12">
+          <UploadCard onFilesChange={setFiles}/>
 
-          <div className="font-['Inter'] font-bold text-[24px] leading-[150%] tracking-[0em] align-middle">
-            Comparison Result
-          </div>
-          <div className="flex w-full gap-8">
-            <ComparisonCard
-              title="Model CNN + ReLU"
-              genre="Rock"
-              executeTime={"0.2ms"}
-            />
-            <ComparisonCard
-              title="Model CNN + Mish"
-              genre="Rock"
-              executeTime={"0.5ms"}
-            />
-          </div>
+          {files && files.length > 0 && (
+            <>
+              <div className="max-w-4xl mx-auto text-center my-auto">
+                {/* Heading */}
+                <h1 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight">
+                  Comparison Result <br />
+                </h1>
+
+                {/* Description */}
+                <p className="mt-6 text-lg text-gray-600 leading-relaxed">
+                  {files?.[0]?.name}
+                </p>
+              </div>
+
+              <div className="flex flex-col lg:flex-row gap-8">
+                <ComparisonCard
+                  title="Model CNN + ReLU"
+                  genre="Rock"
+                  executeTime="0.2ms"
+                />
+                <ComparisonCard
+                  title="Model CNN + Mish"
+                  genre="Rock"
+                  executeTime="0.5ms"
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
-    </div>
+      <Footer />
+    </section>
   );
 }
 
