@@ -1,7 +1,7 @@
 "use client";
 
-import { Navbar } from "@/components/Navbar";
 import Image from "next/image";
+import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import musifikasiLogoIcon from "@/app/styles/musifikasi_logo.svg";
 import Modal from "./ui/modal";
