@@ -4,10 +4,12 @@ const ComparisonCard = ({
   title,
   genre,
   executeTime,
+  avg_confidence,
 }: {
   title: string;
   genre: string;
   executeTime: string | number;
+  avg_confidence: string | number;
 }) => {
   return (
     <div
@@ -31,20 +33,15 @@ const ComparisonCard = ({
 
       {/* Description */}
       <p className="mt-4 text-gray-600 text-sm leading-relaxed">
-        Modi dolorem expedita deleniti. Corporis iste qui inventore pariatur
-        adipisci vitae.
+        {avg_confidence}
       </p>
 
       {/* Features */}
       <ul className="mt-6 space-y-3">
-        {[
-          "45 menit",
-        ].map((item, i) => (
-          <li key={i} className="flex items-center gap-3 text-gray-700 text-sm">
+          <li className="flex items-center gap-3 text-gray-700 text-sm">
             <span className="text-indigo-500 text-xl">🕛</span>
-            {item}
+              {executeTime}
           </li>
-        ))}
       </ul>
 
     </div>

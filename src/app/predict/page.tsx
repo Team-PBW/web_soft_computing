@@ -45,7 +45,7 @@ function PredictPage() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch("http://52.74.187.173:8000/music/predict", {
+      const res = await fetch("https://api.sidemen.shop/music/predict", {
         method: "POST",
         body: formData,
       });
@@ -72,7 +72,7 @@ function PredictPage() {
       setPrediction(null);
 
       const res = await fetch(
-        "http://52.74.187.173:8000/music/predict_download",
+        "https://api.sidemen.shop/music/predict_download",
         {
           method: "POST",
           headers: {
@@ -101,6 +101,23 @@ function PredictPage() {
       uploadAndPredict(files[0]); 
     }
   }, [files]);
+
+  const GENRES = [
+    "Blues",
+    "Classical",
+    "Country",
+    "Disco",
+    "Hiphop",
+    "Jazz",
+    "Metal",
+    "Pop",
+    "Reggae",
+    "Rock",
+  ] as const;
+
+  const getGenreName = (classId: number): string => {
+    return GENRES[classId] ?? "Unknown";
+  };
 
   return (
     <section>
@@ -133,14 +150,16 @@ function PredictPage() {
             <div className="flex flex-col lg:flex-row gap-8">
               <ComparisonCard
                 title="Model CNN + ReLU"
-                genre={`Class ${prediction.result.relu.summary.final_class}`}
-                executeTime={`${prediction.result.relu.computation_time_sec}s`}
+                genre={getGenreName(prediction.result.relu.summary.final_class)}
+                executeTime={`${prediction.result.relu.computation_time_sec} s`}
+                avg_confidence={`Tingkat keyakinan model : ${prediction.result.relu.summary.avg_confidence.toFixed(4)}`}
               />
 
               <ComparisonCard
                 title="Model CNN + Mish"
-                genre={`Class ${prediction.result.mish.summary.final_class}`}
-                executeTime={`${prediction.result.mish.computation_time_sec}s`}
+                genre={getGenreName(prediction.result.mish.summary.final_class)}
+                executeTime={`${prediction.result.mish.computation_time_sec} s`}
+                avg_confidence={`Tingkat keyakinan model : ${prediction.result.mish.summary.avg_confidence.toFixed(4)}`}
               />
             </div>
           )}
