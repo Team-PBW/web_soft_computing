@@ -11,13 +11,43 @@ import { ProgressUpload } from "./ProgressUpload";
 import { IoMdClose } from "react-icons/io";
 
 
-const UploadCard = ({ onFilesChange }: { onFilesChange: (files: File[]) => void }) => {
+const UploadCard = ({ 
+    onFilesChange,
+    onUrlSubmit
+  }: { 
+    onFilesChange: (files: File[]) => void;
+    onUrlSubmit: (url: string) => void; 
+  }) => {
   const [files, setFiles] = useState<File[] | undefined>();
   const [open, setOpen] = useState(false);
+  const [url, setUrl] = useState("");
+  const ALLOWED_TYPES = ["audio/mpeg", "audio/wav"];
+
   const handleDrop = (newFiles: File[]) => {
-    setFiles(newFiles);
-    onFilesChange(newFiles); // ⬅️ kirim ke parent
+    const validFiles = newFiles.filter((file) =>
+      ALLOWED_TYPES.includes(file.type)
+    );
+
+    if (validFiles.length === 0) {
+      alert("Hanya file MP3 atau WAV yang diperbolehkan");
+      return;
+    }
+
+    setFiles(validFiles);
+    onFilesChange(validFiles); // kirim ke parent
   };
+
+  const handleSubmitUrl = () => {
+    if (!url.startsWith("http")) {
+      alert("URL tidak valid");
+      return;
+    }
+
+    onUrlSubmit(url);
+    setOpen(false);
+    setUrl("");
+  };
+
   return (
     <div
       className="
@@ -85,6 +115,8 @@ const UploadCard = ({ onFilesChange }: { onFilesChange: (files: File[]) => void 
         title="Tambahkan File Melalui URL"
       >
         <input
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
           type="text"
           placeholder="Masukkan URL"
           className="w-full rounded border border-gray-300 px-4 py-3 text-sm
@@ -101,6 +133,7 @@ const UploadCard = ({ onFilesChange }: { onFilesChange: (files: File[]) => void 
             Batal
           </button>
           <button
+            onClick={handleSubmitUrl}
             className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
           >
             Kirim
