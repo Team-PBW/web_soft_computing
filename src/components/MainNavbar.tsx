@@ -25,7 +25,7 @@ const MainNavbar = () => {
     //     Get Started
     //   </Button>
     // </div>
-    <nav className="w-full bg-white rounded-xl">
+    <nav className="w-full bg-slate-950 rounded-s">
       <div className="max-w-7xl mx-auto px-8 py-4">
         <div className="flex items-center justify-between min-h-[64px]">
 
@@ -40,20 +40,20 @@ const MainNavbar = () => {
                 alt="musifikasi_logo"
               />
               <span className="text-blue-700 font-semibold tracking-wide text-lg">
-                MUSIFIKASI
+                Ivory
               </span>
             </div>
 
             {/* Menu */}
             <ul className="flex items-center gap-10 text-base font-medium">
-              <li className="relative text-gray-900 cursor-pointer">
+              <li className="relative text-gray-900 cursor-pointer text-white">
                 Dashboard
                 <span className="absolute left-0 -bottom-4 w-full h-[3px] bg-indigo-600 rounded-full" />
               </li>
-              <li className="text-gray-500 hover:text-gray-900 cursor-pointer">
+              <li className="text-gray-500 hover:text-gray-900 cursor-pointer text-white">
                 About
               </li>
-              <li className="text-gray-500 hover:text-gray-900 cursor-pointer">
+              <li className="text-gray-500 hover:text-gray-900 cursor-pointer text-white">
                 History
               </li>
             </ul>
@@ -61,7 +61,7 @@ const MainNavbar = () => {
 
           {/* RIGHT */}
           <div className="flex items-center gap-6">
-            <button 
+            {/* <button 
               className="flex items-center gap-2 px-7 py-3 rounded border border-blue-600 text-blue-600 text-base font-medium transition"
               onClick={() => {
                 setOpen(true);
@@ -69,8 +69,8 @@ const MainNavbar = () => {
               }}
             >
               Sign in
-            </button>
-                <button 
+            </button> */}
+                {/* <button 
               className="flex items-center gap-2 px-7 py-3 rounded bg-blue-600 text-white text-base font-medium hover:bg-indigo-700 transition"
               onClick={() => {
                 setOpen(true);
@@ -78,7 +78,7 @@ const MainNavbar = () => {
               }}
             >
               Get Started
-            </button>
+            </button> */}
           </div>
             <Modal
               isOpen={open}

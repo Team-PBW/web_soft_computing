@@ -41,7 +41,7 @@ function PredictPage() {
     try {
       setLoading(true);
       setPrediction(null);
-
+      
       const formData = new FormData();
       formData.append("file", file);
 
